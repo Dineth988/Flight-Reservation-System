@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">flight_reservation_system</string>
+    <string name="underlined_text"><u>Sign here</u></string>
+</resources>
