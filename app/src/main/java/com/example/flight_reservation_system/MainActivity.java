@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         if(databaseHelper.verifyUser(username,password)){
             Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show();
-            // Navigate to another activity
-            Intent intent = new Intent(this, sign_up_activity.class);
+            // Navigate to the profile
+            Intent intent = new Intent(this, Profile_Activity.class);
             startActivity(intent);
         }
         else {
