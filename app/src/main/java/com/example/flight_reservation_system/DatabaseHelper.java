@@ -2,6 +2,7 @@ package com.example.flight_reservation_system;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -39,5 +40,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long results = db.insert("users",null, values);
         db.close();
         return results != -1;
+    }
+    public boolean verifyUser(String username, String password){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM Users WHERE username = ? AND password = ?",
+                                     new String[]{username,password});
+        boolean isValid = cursor.getCount() > 0;
+        cursor.close();
+        return isValid;
     }
 }

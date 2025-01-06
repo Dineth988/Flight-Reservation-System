@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FAFAFB"
+    android:onClick="onLogin"
     tools:context=".MainActivity">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -14,7 +15,7 @@
         android:layout_height="490dp"
         android:layout_marginBottom="46dp"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/editTextText2"
+        app:layout_constraintBottom_toTopOf="@+id/editTextUername2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:shapeAppearanceOverlay="@style/circular"
@@ -23,23 +24,23 @@
         app:strokeWidth="2dp" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/editTextUername2"
         android:layout_width="361dp"
         android:layout_height="50dp"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="19dp"
         android:ems="10"
-        android:hint="example@gmail.com"
+        android:hint="Username"
         android:inputType="text"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword2"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPassword2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPassword2"
+        android:id="@+id/editTextPassword2"
         android:layout_width="361dp"
         android:layout_height="50dp"
         android:layout_marginStart="25dp"
@@ -52,7 +53,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextUername2" />
 
     <Button
         android:id="@+id/button"
@@ -62,6 +63,7 @@
         android:layout_marginTop="13dp"
         android:layout_marginEnd="33dp"
         android:backgroundTint="#364ED3"
+        android:onClick="onLogin"
         android:text="Log in"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +102,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword2" />
 
     <TextView
         android:id="@+id/textView2"
