@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show();
             // Navigate to the profile
             Intent intent = new Intent(this, Profile_Activity.class);
+            intent.putExtra("username", username);
             startActivity(intent);
         }
         else {

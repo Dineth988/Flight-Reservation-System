@@ -24,6 +24,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "username TEXT NOT NULL, " +
                 "password TEXT NOT NULL)");
 
+        db.execSQL("CREATE TABLE HotelInformations (" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "hotelName TEXT NOT NULL, " +
+                "location TEXT NOT NULL, " +
+                "contactNumber TEXT NOT NULL, " +
+                "email TEXT, " +
+                "rating REAL, " +
+                "totalRooms INTEGER NOT NULL, " +
+                "description TEXT)");
+
+        db.execSQL("CREATE TABLE FlightBookings (" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "flightNumber INTEGER, " +
+                "passengerName TEXT NOT NULL, " +
+                "passengerContactNumber TEXT, " +
+                "passengerEmail TEXT, " +
+                "departureDate TEXT NOT NULL, " +
+                "arrivalDate TEXT NOT NULL, " +
+                "seatClass TEXT, " +
+                "seatNumber TEXT, " +
+                "totalAmount REAL, " +
+                "bookingStatus TEXT)");
+
+
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
@@ -49,4 +73,56 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return isValid;
     }
+    public Cursor getUserDetail(String username){
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM Users WHERE username = ?",
+                new String[]{username});
+
+    }
+    public void insertHotelInformation(String hotelName, String location, String contactNumber,
+                                       String email, double rating, int totalRooms, String description) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("hotelName", hotelName);
+        values.put("location", location);
+        values.put("contactNumber", contactNumber);
+        values.put("email", email);
+        values.put("rating", rating);
+        values.put("totalRooms", totalRooms);
+        values.put("description", description);
+
+        // Insert the data into the table
+        long result = db.insert("HotelInformations", null, values);
+        db.close();
+    }
+    public Cursor readHotelData(){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        return db.rawQuery("SELECT * FROM HotelInformations",null);
+    }
+    public Cursor readBookings(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        return  db.rawQuery("SELECT * FROM FlightBookings",null);
+    }
+    public void insertBookingInfo(int flightNumber, String passengerName, String passengerContactNumber,
+                                  String passengerEmail, String departureDate, String arrivalDate,
+                                  String seatClass, String seatNumber, double totalAmount, String bookingStatus) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("flightNumber", flightNumber);
+        values.put("passengerName", passengerName);
+        values.put("passengerContactNumber", passengerContactNumber);
+        values.put("passengerEmail", passengerEmail);
+        values.put("departureDate", departureDate);
+        values.put("arrivalDate", arrivalDate);
+        values.put("seatClass", seatClass);
+        values.put("seatNumber", seatNumber);
+        values.put("totalAmount", totalAmount);
+        values.put("bookingStatus", bookingStatus);
+
+        // Insert the data into the table
+        long result = db.insert("FlightBookings", null, values);
+        db.close();
+    }
+
 }
