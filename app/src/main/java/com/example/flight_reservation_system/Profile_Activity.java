@@ -60,4 +60,13 @@ public class Profile_Activity extends AppCompatActivity {
         Intent intent = new Intent(this, Booking_Activity.class);
         startActivity(intent);
     }
+    public void onClickFlights(View view){
+        Intent intent = new Intent(this, FlightSearch.class);
+        startActivity(intent);
+    }
+    public void onClickDocument(View view){
+        Intent intent = new Intent(this, DocumentStorage.class);
+        startActivity(intent);
+    }
+
 }

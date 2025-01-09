@@ -1,6 +1,7 @@
 package com.example.flight_reservation_system;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,21 @@ public class CustomAdapterBooking extends RecyclerView.Adapter<CustomAdapterBook
         holder.passengerName.setText(String.valueOf(passengerName.get(position)));
         holder.departureDate.setText(String.valueOf(departureDate.get(position)));
         holder.bookingStatus.setText(String.valueOf(bookingStatus.get(position)));
+
+
+//        holder.itemView.setOnClickListener(v -> {
+//            Intent intent = new Intent(context, Booking_Details_Activity.class);
+//
+//            // Pass the booking details to the next activity using intent extras
+//
+//            intent.putExtra("flightNumber", flightNumber.get(position));
+//            intent.putExtra("passengerName", passengerName.get(position));
+//            intent.putExtra("departureDate", departureDate.get(position));
+//            intent.putExtra("bookingStatus", bookingStatus.get(position));
+//
+//            context.startActivity(intent); // Start the BookingDetailsActivity
+//        });
+
     }
 
 

@@ -16,20 +16,39 @@ import java.util.ArrayList;
 
 public class Booking_Activity extends AppCompatActivity {
 
-    DatabaseHelper databaseHelper;
-    ArrayList<String> flightNumber,passengerName,departureDate,bookingStatus;
-    CustomAdapterBooking customAdapterBooking;
-    RecyclerView recyclerView;
+    private DatabaseHelper databaseHelper;
+    private ArrayList<String> flightNumber, passengerName, departureDate, bookingStatus;
+    private CustomAdapterBooking customAdapterBooking;
+    private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_booking);
+
+        // Edge-to-edge handling
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Initialize RecyclerView
+        recyclerView = findViewById(R.id.recyclerViewB); // Ensure this matches your RecyclerView's ID in XML
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Initialize DatabaseHelper
+        databaseHelper = new DatabaseHelper(this);
+
+        // Insert booking data (for demonstration purposes)
+//        insertSampleData();
+
+        // Display booking data
+        displayBookingData();
+    }
+
+    private void insertSampleData() {
         databaseHelper.insertBookingInfo(
                 101,
                 "John Doe",
@@ -68,36 +87,31 @@ public class Booking_Activity extends AppCompatActivity {
                 1000.00,
                 "Cancelled"
         );
-
-
-
-        displayBookingData();
     }
 
-    public void displayBookingData(){
-        databaseHelper = new DatabaseHelper(this);
+    private void displayBookingData() {
+        // Initialize data lists
         flightNumber = new ArrayList<>();
         passengerName = new ArrayList<>();
         departureDate = new ArrayList<>();
         bookingStatus = new ArrayList<>();
-        customAdapterBooking = new CustomAdapterBooking(this,flightNumber,passengerName,departureDate,bookingStatus);
+
+        // Initialize adapter
+        customAdapterBooking = new CustomAdapterBooking(this, flightNumber, passengerName, departureDate, bookingStatus);
         recyclerView.setAdapter(customAdapterBooking);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
+        // Fetch data from database
         Cursor cursor = databaseHelper.readHotelData();
-        if(cursor.getCount()==0){
+        if (cursor.getCount() == 0) {
             Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            while (cursor.moveToNext()){
-                flightNumber.add(cursor.getString(0));
+        } else {
+            while (cursor.moveToNext()) {
+                flightNumber.add(cursor.getString(0)); // Ensure columns match your database schema
                 passengerName.add(cursor.getString(1));
                 departureDate.add(cursor.getString(2));
                 bookingStatus.add(cursor.getString(3));
-
             }
+            customAdapterBooking.notifyDataSetChanged(); // Notify adapter of data changes
         }
     }
-
 }
