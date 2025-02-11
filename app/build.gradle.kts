@@ -1,5 +1,7 @@
 plugins {
+    id("com.google.gms.google-services")
     alias(libs.plugins.android.application)
+
 }
 
 android {
@@ -33,11 +35,24 @@ android {
 
 dependencies {
 
+
+    implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation ("com.google.firebase:firebase-auth:22.1.1")
+    implementation ("com.google.android.material:material:1.9.0")
+    implementation ("com.google.firebase:firebase-firestore:24.9.1")
+    implementation ("com.google.android.gms:play-services-auth:20.7.0")
+    implementation ("com.google.android.gms:play-services-base:18.3.0")
+
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.glide) //
+    implementation(libs.glide)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.database) //
     annotationProcessor(libs.glide.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

@@ -28,18 +28,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_FILE_PATH = "file_path";
     public static final String COLUMN_THUMBNAIL_PATH = "thumbnail_path";
 
-    DatabaseHelper (Context context) {
+    public DatabaseHelper(Context context) {
         super(context, dbName, null, dbVersion);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        db.execSQL("CREATE TABLE Users (" +
-                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "name TEXT NOT NULL, " +
-                "email TEXT, " +
-                "username TEXT NOT NULL, " +
-                "password TEXT NOT NULL)");
+//        db.execSQL("CREATE TABLE Users (" +
+//                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+//                "name TEXT NOT NULL, " +
+//                "email TEXT, " +
+//                "username TEXT NOT NULL, " +
+//                "password TEXT NOT NULL)");
 
         db.execSQL("CREATE TABLE HotelInformations (" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -84,8 +84,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
-        db.execSQL("DROP TABLE IF EXISTS Users");
-        onCreate(db);
+//        db.execSQL("DROP TABLE IF EXISTS Users");
+//        onCreate(db);
 
         db.execSQL("DROP TABLE IF EXISTS HotelInformations");
         onCreate(db);
@@ -100,17 +100,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
 
     }
-    public boolean addUsers(String name, String email, String username, String password){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("name", name);
-        values.put("email", email);
-        values.put("username", username);
-        values.put("password", password);
-        long results = db.insert("users",null, values);
-        db.close();
-        return results != -1;
-    }
+//    public boolean addUsers(String name, String email, String username, String password){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put("name", name);
+//        values.put("email", email);
+//        values.put("username", username);
+//        values.put("password", password);
+//        long results = db.insert("users",null, values);
+//        db.close();
+//        return results != -1;
+//    }
     public boolean verifyUser(String username, String password){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM Users WHERE username = ? AND password = ?",

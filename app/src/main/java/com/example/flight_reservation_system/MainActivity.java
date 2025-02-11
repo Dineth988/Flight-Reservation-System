@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -13,6 +14,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    FirebaseAuth auth;
+    FirebaseFirestore db;
     DatabaseHelper databaseHelper = new DatabaseHelper(this);
     EditText editTextUsername,editTextPassword;
     @Override
@@ -25,10 +29,12 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
     }
     public void onLogin(View view){
-        editTextUsername = (EditText)findViewById(R.id.editTextUername2);
-        editTextPassword = (EditText)findViewById(R.id.editTextPassword2);
+        editTextUsername = (EditText)findViewById(R.id.editTextUsername);
+        editTextPassword = (EditText)findViewById(R.id.editTextPassword);
 
         String username = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
