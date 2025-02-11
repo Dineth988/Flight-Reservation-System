@@ -13,6 +13,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class sign_up_activity extends AppCompatActivity {
 
     DatabaseHelper db;
@@ -37,18 +43,38 @@ public class sign_up_activity extends AppCompatActivity {
         btnSignUp = (Button)findViewById(R.id.btnSignUp);
         signUp();
     }
+
     public void signUp(){
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isInsertd = db.addUsers(editTextName.getText().toString(),editTextEmail.getText().toString(),
-                             editTextUsername.getText().toString(),editTextPassword.getText().toString());
-                if(isInsertd=true){
-                    Toast.makeText(sign_up_activity.this,"User Registered",Toast.LENGTH_LONG).show();
-                }
-                else {
-                    Toast.makeText(sign_up_activity.this,"User Not Registered",Toast.LENGTH_LONG).show();
-                }
+//                boolean isInsertd = db.addUsers(editTextName.getText().toString(),editTextEmail.getText().toString(),
+//                             editTextUsername.getText().toString(),editTextPassword.getText().toString());
+//                if(isInsertd=true){
+//                    Toast.makeText(sign_up_activity.this,"User Registered",Toast.LENGTH_LONG).show();
+//                }
+//                else {
+//                    Toast.makeText(sign_up_activity.this,"User Not Registered",Toast.LENGTH_LONG).show();
+//                }
+                String email = editTextEmail.getText().toString();
+                String name = editTextName.getText().toString();
+                String username = editTextUsername.getText().toString();
+                String password = editTextPassword.getText().toString();
+
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                // Get instance of FirebaseHelper and call saveUser()
+                                FirebaseHelper firebaseHelper = new FirebaseHelper();
+                                firebaseHelper.saveUser(name, email, username, password);
+                                Toast.makeText(sign_up_activity.this, "Registration success", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(sign_up_activity.this, MainActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(sign_up_activity.this, "Registration Failed", Toast.LENGTH_LONG).show();
+                            }
+                        });
+
             }
         });
     }

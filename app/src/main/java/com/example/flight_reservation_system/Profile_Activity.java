@@ -12,6 +12,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.flight_reservation_system.Fragment.DocumentFragment;
+
 public class Profile_Activity extends AppCompatActivity {
     DatabaseHelper databaseHelper;
     TextView textViewUsername,textViewEmail,textViewName;
@@ -60,12 +62,9 @@ public class Profile_Activity extends AppCompatActivity {
         Intent intent = new Intent(this, Booking_Activity.class);
         startActivity(intent);
     }
-    public void onClickFlights(View view){
-        Intent intent = new Intent(this, FlightSearch.class);
-        startActivity(intent);
-    }
+
     public void onClickDocument(View view){
-        Intent intent = new Intent(this, DocumentStorage.class);
+        Intent intent = new Intent(this, DocumentFragment.class);
         startActivity(intent);
     }
 

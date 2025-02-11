@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "519943867451",
+    "project_id": "skyreserve-cf2a7",
+    "storage_bucket": "skyreserve-cf2a7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519943867451:android:a9766a9200dde609f2601e",
+        "android_client_info": {
+          "package_name": "com.example.flight_reservation_system"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpWZFeH70VXXcSErLyB6Qov6Sr221Dleg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

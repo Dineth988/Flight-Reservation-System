@@ -18,6 +18,11 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
 
     public DocumentAdapter(List<Document> documents) {
         this.documents = documents;
+        if (documents == null || documents.isEmpty()) {
+            System.out.println("DocumentAdapter: No documents available to display");
+        } else {
+            System.out.println("DocumentAdapter: Loaded " + documents.size() + " documents");
+        }
     }
 
     @NonNull
@@ -53,4 +58,10 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
             documentName = itemView.findViewById(R.id.documentName);
         }
     }
+    public void updateDocuments(List<Document> newDocuments) {
+        this.documents.clear();
+        this.documents.addAll(newDocuments);
+        notifyDataSetChanged();
+    }
+
 }
